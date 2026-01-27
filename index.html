@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Camboinhas Beach House | Guia do Hóspede - Camboinhas Beach House</title>
-  <meta name="description" content="Guia completo para hóspedes da Casa Capuba em Ubatuba. Informações sobre check-in, Wi-Fi, regras, restaurantes, praias e passeios na região.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Camboinhas Beach House | Guest Guide</title>
+  <meta name="description" content="Guest guide for Camboinhas Beach House in Niterói. Check-in, Wi‑Fi, rules, restaurants, beaches and local tips.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      overflow-y: scroll;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { overflow-y: scroll; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: #E53E3E;
@@ -28,31 +20,50 @@
       flex-direction: column;
       align-items: center;
     }
-
-    .font-serif {
-      font-family: 'Playfair Display', serif;
-    }
+    .font-serif { font-family: 'Playfair Display', serif; }
 
     header {
       position: sticky;
       top: 0;
       z-index: 50;
-      background-color: rgba(229, 62, 62, 0.95);
+      background-color: rgba(229,62,62,0.95);
       backdrop-filter: blur(10px);
       width: 100%;
     }
-
     header .header-inner {
       max-width: 42rem;
       margin: 0 auto;
       padding: 1.5rem;
       display: grid;
-      grid-template-columns: 40px 1fr 40px;
+      grid-template-columns: 40px 1fr 160px;
       align-items: center;
       gap: 0.5rem;
     }
 
-    header button {
+    /* Language switch buttons container */
+    .lang-switch {
+      display: inline-flex;
+      gap: 0.5rem;
+      justify-self: center;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.18s, color 0.18s, border-color 0.18s;
+      font-size: 0.875rem;
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: #fff;
+      color: #E53E3E;
+      border-color: #fff;
+    }
+
+    header button#menuBtn {
       background: none;
       border: none;
       color: white;
@@ -67,16 +78,9 @@
       width: 40px;
       height: 40px;
     }
+    header button#menuBtn:hover { background-color: rgba(255,255,255,0.1); }
 
-    header button:hover {
-      background-color: rgba(255,255,255,0.1);
-    }
-
-    .header-spacer {
-      width: 40px;
-      height: 40px;
-      justify-self: center;
-    }
+    .header-spacer { width: 40px; height: 40px; justify-self: center; }
 
     header span {
       justify-self: center;
@@ -87,1471 +91,1547 @@
       font-weight: 500;
     }
 
-    .icon {
-      width: 24px;
-      height: 24px;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      fill: none;
-    }
+    .icon { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; fill: none; }
+    .icon-lg { width: 32px; height: 32px; }
+    .icon-xl { width: 64px; height: 64px; }
 
-    .icon-lg {
-      width: 32px;
-      height: 32px;
-    }
+    .section { display: none; padding: 2rem 1.5rem; max-width: 42rem; width: 100%; margin: 0 auto; }
+    .section.active { display: block; }
+    .section h2 { font-size: 1.875rem; font-weight: 700; margin-bottom: 1rem; text-align: center; }
+    .section p { line-height: 1.7; margin-bottom: 1rem; }
 
-    .icon-xl {
-      width: 64px;
-      height: 64px;
-    }
+    .home-section { display: none; min-height: calc(100vh - 80px); width: 100%; max-width: 42rem; margin: 0 auto; }
+    .home-section.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
 
-    .section {
-      display: none;
-      padding: 2rem 1.5rem;
-      max-width: 42rem;
-      width: 100%;
-      margin: 0 auto;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .section h2 {
-      font-size: 1.875rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
-    .section p {
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .section-photos {
-      margin-bottom: 1rem;
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .section-photo {
-      width: 100%;
-      max-width: 360px;
-      height: auto;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(0,0,0,0.05));
-      display: block;
-      margin: 0 auto;
-    }
-
-    .photo-grid {
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      justify-items: center;
-    }
-
-    .photo-grid img {
-      width: 100%;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 0.5rem;
-      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(0,0,0,0.05));
-      display: block;
-    }
-
-    /* HOME - Layout centralizado */
-    .home-section {
-      display: none;
-      min-height: calc(100vh - 80px);
-      width: 100%;
-      max-width: 42rem;
-      margin: 0 auto;
-    }
-
-    .home-section.active {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .home-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
-      width: 100%;
-    }
-
-    .home-content h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      text-align: center;
-      font-style: italic;
-    }
-
-    .home-content .subtitle {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      opacity: 0.9;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; width: 100%; max-width: 400px; margin: 0 auto; }
     .menu-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      background-color: #C53030;
-      border: none;
-      border-radius: 1rem;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      aspect-ratio: 1;
-      color: white;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 1rem; background-color: #C53030; border: none; border-radius: 1rem; cursor: pointer;
+      transition: background-color 0.2s; aspect-ratio: 1; color: white;
     }
-
-    .menu-item:hover {
-      background-color: #9B2C2C;
-    }
-
-    .menu-item svg {
-      margin-bottom: 0.5rem;
-    }
-
-    .menu-item span {
-      font-size: 0.625rem;
-      text-align: center;
-      line-height: 1.3;
-      font-weight: 500;
-      text-transform: uppercase;
-    }
+    .menu-item:hover { background-color: #9B2C2C; }
+    .menu-item span { font-size: 0.625rem; text-align: center; line-height: 1.3; font-weight: 500; text-transform: uppercase; }
 
     .contact-btn {
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 400px;
-      background-color: #FFF5F5;
-      color: #E53E3E;
-      padding: 1rem;
-      border: none;
-      border-radius: 9999px;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      transition: opacity 0.2s;
+      margin-top: 2rem; width: 100%; max-width: 400px; background-color: #FFF5F5; color: #E53E3E;
+      padding: 1rem; border: none; border-radius: 9999px; font-weight: 500; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem; transition: opacity 0.2s;
+    }
+    .contact-btn:hover { opacity: 0.9; }
+
+    footer { margin-top: 2rem; text-align: center; font-size: 0.875rem; opacity: 0.8; }
+
+    .card { background-color: #C53030; padding: 1rem; border-radius: 0.75rem; margin-bottom: 0.75rem; }
+    .card-lg { padding: 1.5rem; border-radius: 1rem; margin-bottom: 1.5rem; }
+    .card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+
+    .badge { font-size: 0.75rem; background-color: #9B2C2C; padding: 0.25rem 0.5rem; border-radius: 9999px; }
+    ul, ol { margin-left: 1.5rem; margin-top: 0.5rem; }
+    li { margin-bottom: 0.5rem; line-height: 1.5; }
+
+    .wifi-box { text-align: center; padding: 2rem; }
+    .wifi-box .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .wifi-box .value { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .wifi-box .value-mono { font-family: monospace; }
+
+    .btn-accent { display: inline-block; background-color: #FFF5F5; color: #E53E3E; padding: 0.75rem 1.5rem; border-radius: 9999px; font-weight: 500; text-decoration: none; margin-top: 1rem; transition: opacity 0.2s; }
+    .btn-card { display: block; width: 100%; background-color: #C53030; color: white; padding: 1rem; border-radius: 9999px; font-weight: 500; text-decoration: none; text-align: center; margin-top: 0.75rem; transition: background-color 0.2s; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; background-color: #C53030; padding: 1rem; border-radius: 0.75rem; margin-bottom: 0.75rem; text-decoration: none; color: white; transition: background-color 0.2s; }
+    .contact-link:hover { background-color: #9B2C2C; }
+
+    .contact-icon { width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+    .contact-icon.whatsapp { background-color: #22C55E; }
+
+    .flex-between { display:flex; justify-content: space-between; align-items: flex-start; }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; background-color: #E53E3E; z-index: 40; padding-top: 4rem; overflow: auto; }
+    .mobile-menu.active { display: block; }
+    .mobile-menu-content { padding: 1rem; }
+    .mobile-menu-item { display:flex; align-items:center; gap:1rem; width:100%; padding:1rem; background-color:#C53030; border:none; border-radius:0.75rem; color:white; cursor:pointer; margin-bottom:0.5rem; transition: background-color 0.2s; font-size:0.875rem; font-weight:500; }
+    .mobile-menu-item:hover { background-color: #9B2C2C; }
+    .mobile-menu-item.accent { background-color: #FFF5F5; color: #E53E3E; }
+
+    /* Language content display */
+    .lang { display: none; }
+    .lang.active { display: block; }
+
+    @media (max-width:767px) {
+      header .header-inner { grid-template-columns: 36px 1fr 120px; padding: 0.75rem; }
+      .lang-switch { justify-self: end; }
+      .menu-grid { max-width: 360px; margin: 0 auto; }
     }
 
-    .contact-btn:hover {
-      opacity: 0.9;
+    @media (min-width:768px) {
+      .single-carousel img { height: 380px; }
     }
-
-    footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.875rem;
-      opacity: 0.8;
-    }
-
-    footer p {
-      margin-bottom: 0.25rem;
-    }
-
-    .card {
-      background-color: #C53030;
-      padding: 1rem;
-      border-radius: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .card-lg {
-      padding: 1.5rem;
-      border-radius: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .card h3 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .card .title {
-      font-weight: 600;
-    }
-
-    .card .desc {
-      font-size: 0.875rem;
-      opacity: 0.8;
-      margin-top: 0.25rem;
-    }
-
-    .card .time {
-      font-size: 0.75rem;
-      opacity: 0.6;
-      margin-top: 0.25rem;
-    }
-
-    .badge {
-      font-size: 0.75rem;
-      background-color: #9B2C2C;
-      padding: 0.25rem 0.5rem;
-      border-radius: 9999px;
-    }
-
-    .badge-inline {
-      display: inline-block;
-      margin-top: 0.25rem;
-    }
-
-    ul, ol {
-      margin-left: 1.5rem;
-      margin-top: 0.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-      line-height: 1.5;
-    }
-
-    .wifi-box {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .wifi-box .label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.5rem;
-    }
-
-    .wifi-box .value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
-
-    .wifi-box .value-mono {
-      font-family: monospace;
-    }
-
-    .btn-accent {
-      display: inline-block;
-      background-color: #FFF5F5;
-      color: #E53E3E;
-      padding: 0.75rem 1.5rem;
-      border-radius: 9999px;
-      font-weight: 500;
-      text-decoration: none;
-      margin-top: 1rem;
-      transition: opacity 0.2s;
-    }
-
-    .btn-accent:hover {
-      opacity: 0.9;
-    }
-
-    .btn-card {
-      display: block;
-      width: 100%;
-      background-color: #C53030;
-      color: white;
-      padding: 1rem;
-      border-radius: 9999px;
-      font-weight: 500;
-      text-decoration: none;
-      text-align: center;
-      margin-top: 0.75rem;
-      transition: background-color 0.2s;
-    }
-
-    .btn-card:hover {
-      background-color: #9B2C2C;
-    }
-
-    .contact-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background-color: #C53030;
-      padding: 1rem;
-      border-radius: 0.75rem;
-      margin-bottom: 0.75rem;
-      text-decoration: none;
-      color: white;
-      transition: background-color 0.2s;
-    }
-
-    .contact-link:hover {
-      background-color: #9B2C2C;
-    }
-
-    .contact-icon {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-    }
-
-    .contact-icon.whatsapp {
-      background-color: #22C55E;
-    }
-
-    .contact-icon.phone {
-      background-color: #9B2C2C;
-    }
-
-    .contact-icon.email {
-      background-color: #9B2C2C;
-    }
-
-    .contact-icon.instagram {
-      background: linear-gradient(135deg, #833AB4, #E1306C);
-    }
-
-    .flex-between {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background-color: #E53E3E;
-      z-index: 40;
-      padding-top: 4rem;
-      overflow: auto;
-    }
-
-    .mobile-menu.active {
-      display: block;
-    }
-
-    .mobile-menu-content {
-      padding: 1rem;
-    }
-
-    .mobile-menu-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-      padding: 1rem;
-      background-color: #C53030;
-      border: none;
-      border-radius: 0.75rem;
-      color: white;
-      cursor: pointer;
-      margin-bottom: 0.5rem;
-      transition: background-color 0.2s;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-
-    .mobile-menu-item:hover {
-      background-color: #9B2C2C;
-    }
-
-    .mobile-menu-item.accent {
-      background-color: #FFF5F5;
-      color: #E53E3E;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .text-sm {
-      font-size: 0.875rem;
-    }
-
-    .text-xs {
-      font-size: 0.75rem;
-    }
-
-    .opacity-80 {
-      opacity: 0.8;
-    }
-
-    .opacity-70 {
-      opacity: 0.7;
-    }
-
-    .mt-4 {
-      margin-top: 1rem;
-    }
-
-    .mt-6 {
-      margin-top: 1.5rem;
-    }
-
-    .mb-4 {
-      margin-bottom: 1rem;
-    }
-
-    .pt-6 {
-      padding-top: 1.5rem;
-    }
-
-    .border-t {
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
-
-    @media (min-width: 768px) {
-      .home-content h1 {
-        font-size: 3rem;
-      }
-    }
-
-    @media (max-width: 767px) {
-      .section {
-        padding: 1.25rem 1rem;
-        text-align: center;
-      }
-
-      .card, .card-lg {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100%;
-        text-align: center;
-      }
-
-      .flex-between {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .menu-grid {
-        max-width: 360px;
-        margin: 0 auto;
-      }
-
-      .menu-item {
-        padding: 0.9rem;
-      }
-
-      .menu-item span {
-        font-size: 0.625rem;
-      }
-
-      .home-content h1 {
-        font-size: 2rem;
-      }
-
-      .wifi-box .value {
-        font-size: 1.25rem;
-      }
-
-      .contact-link {
-        justify-content: center;
-        text-align: center;
-      }
-
-      .contact-btn {
-        width: calc(100% - 2rem);
-        max-width: 420px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      footer {
-        padding-bottom: 2rem;
-      }
-
-      header .header-inner {
-        grid-template-columns: 36px 1fr 36px;
-        padding: 0.75rem;
-      }
-
-      header button {
-        width: 36px;
-        height: 36px;
-      }
-
-      .header-spacer {
-        width: 36px;
-        height: 36px;
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 320px;
-      }
-
-      .section-photo {
-        max-width: 320px;
-        aspect-ratio: 16/9;
-      }
-
-      .photo-grid img {
-        height: 72px;
-      }
-    }
-  
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="header-inner">
-      <button id="menuBtn" onclick="toggleMenu()" aria-label="Abrir menu">
-        <svg class="icon" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      <button id="menuBtn" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
       </button>
-      <span>Prezado Hóspede</span>
-      <div class="header-spacer" aria-hidden="true"></div>
+
+      <span id="headerTitle">Dear Guest</span>
+
+      <div class="lang-switch" role="tablist" aria-label="Language selector">
+        <button id="btnPT" aria-pressed="false" role="tab" aria-controls="content" onclick="setLang('pt')">PT</button>
+        <button id="btnEN" aria-pressed="true" role="tab" aria-controls="content" onclick="setLang('en')">EN</button>
+        <button id="btnES" aria-pressed="false" role="tab" aria-controls="content" onclick="setLang('es')">ES</button>
+      </div>
     </div>
   </header>
 
   <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu">
-    <div class="mobile-menu-content">
-      <button class="mobile-menu-item" onclick="showSection('bemvindo')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        BEM-VINDO
+  <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-content" id="mobileMenuContent">
+      <!-- Menu items' labels are set dynamically per language -->
+      <button class="mobile-menu-item" data-section="bemvindo" onclick="showSection('bemvindo')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="mobile-label">WELCOME</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('direcao')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        INSTRUÇÕES DE DIREÇÃO
+
+      <button class="mobile-menu-item" data-section="direcao" onclick="showSection('direcao')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="mobile-label">DIRECTIONS</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('checkin')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-        CHECK-IN / CHECK-OUT
+
+      <button class="mobile-menu-item" data-section="checkin" onclick="showSection('checkin')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        <span class="mobile-label">CHECK-IN / CHECK-OUT</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('wifi')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
-        WI-FI
+
+      <button class="mobile-menu-item" data-section="wifi" onclick="showSection('wifi')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
+        <span class="mobile-label">WI-FI</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('regras')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-        REGRAS DA CASA
+
+      <button class="mobile-menu-item" data-section="regras" onclick="showSection('regras')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span class="mobile-label">HOUSE RULES</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('faq')">
-        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-        PERGUNTAS FREQUENTES
+
+      <button class="mobile-menu-item" data-section="faq" onclick="showSection('faq')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        <span class="mobile-label">FAQ</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('supermercados')">
-        <svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-        SUPERMERCADOS E LOJAS
+
+      <button class="mobile-menu-item" data-section="supermercados" onclick="showSection('supermercados')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span class="mobile-label">SUPERMARKETS & SHOPS</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('restaurantes')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
-        RESTAURANTES E CAFÉS
+
+      <button class="mobile-menu-item" data-section="restaurantes" onclick="showSection('restaurantes')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+        <span class="mobile-label">RESTAURANTS & CAFÉS</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('lugares')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-        LUGARES PARA VISITAR
+
+      <button class="mobile-menu-item" data-section="lugares" onclick="showSection('lugares')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="mobile-label">PLACES TO VISIT</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('passeios')">
-        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-        PASSEIOS E EXPERIÊNCIAS
+
+      <button class="mobile-menu-item" data-section="passeios" onclick="showSection('passeios')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+        <span class="mobile-label">TOURS & EXPERIENCES</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('transporte')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
-        TRANSPORTE
+
+      <button class="mobile-menu-item" data-section="transporte" onclick="showSection('transporte')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
+        <span class="mobile-label">TRANSPORT</span>
       </button>
-      <button class="mobile-menu-item" onclick="showSection('avaliacao')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        AVALIAÇÃO
+
+      <button class="mobile-menu-item" data-section="avaliacao" onclick="showSection('avaliacao')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="mobile-label">REVIEWS</span>
       </button>
-      <button class="mobile-menu-item accent" onclick="showSection('contato')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        CONTATO
+
+      <button class="mobile-menu-item accent" data-section="contato" onclick="showSection('contato')">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="mobile-label">CONTACT</span>
       </button>
     </div>
   </div>
 
-  <!-- HOME - Centralizado -->
+  <!-- HOME -->
   <section id="home" class="home-section active">
     <div class="home-content">
-      <h1 class="font-serif">Bem-vindo!</h1>
-      <p class="subtitle">CLIQUE NOS ÍCONES</p>
+      <h1 class="font-serif">
+        <span class="lang lang-en active">Welcome!</span>
+        <span class="lang lang-pt">Bem-vindo!</span>
+        <span class="lang lang-es">¡Bienvenido!</span>
+      </h1>
+      <p class="subtitle">
+        <span class="lang lang-en active">TAP THE ICONS</span>
+        <span class="lang lang-pt">CLIQUE NOS ÍCONES</span>
+        <span class="lang lang-es">TOCA LOS ICONOS</span>
+      </p>
 
-      <div class="menu-grid">
-        <button class="menu-item" onclick="showSection('bemvindo')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>BEM-VINDO</span>
+      <div class="menu-grid" id="menuGrid">
+        <!-- Buttons keep same onclick (section id), labels updated by JS on language change -->
+        <button class="menu-item" data-section="bemvindo" onclick="showSection('bemvindo')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span class="menu-label">WELCOME</span>
         </button>
-        <button class="menu-item" onclick="showSection('direcao')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>INSTRUÇÕES DE DIREÇÃO</span>
+
+        <button class="menu-item" data-section="direcao" onclick="showSection('direcao')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="menu-label">DIRECTIONS</span>
         </button>
-        <button class="menu-item" onclick="showSection('checkin')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-          <span>CHECK-IN / CHECK-OUT</span>
+
+        <button class="menu-item" data-section="checkin" onclick="showSection('checkin')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <span class="menu-label">CHECK-IN / CHECK-OUT</span>
         </button>
-        <button class="menu-item" onclick="showSection('wifi')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
-          <span>WI-FI</span>
+
+        <button class="menu-item" data-section="wifi" onclick="showSection('wifi')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
+          <span class="menu-label">WI-FI</span>
         </button>
-        <button class="menu-item" onclick="showSection('regras')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-          <span>REGRAS DA CASA</span>
+
+        <button class="menu-item" data-section="regras" onclick="showSection('regras')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span class="menu-label">HOUSE RULES</span>
         </button>
-        <button class="menu-item" onclick="showSection('faq')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-          <span>PERGUNTAS FREQUENTES</span>
+
+        <button class="menu-item" data-section="faq" onclick="showSection('faq')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          <span class="menu-label">FAQ</span>
         </button>
-        <button class="menu-item" onclick="showSection('supermercados')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-          <span>SUPERMERCADOS E LOJAS</span>
+
+        <button class="menu-item" data-section="supermercados" onclick="showSection('supermercados')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="menu-label">SUPERMARKETS & SHOPS</span>
         </button>
-        <button class="menu-item" onclick="showSection('restaurantes')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
-          <span>RESTAURANTES E CAFÉS</span>
+
+        <button class="menu-item" data-section="restaurantes" onclick="showSection('restaurantes')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+          <span class="menu-label">RESTAURANTS & CAFÉS</span>
         </button>
-        <button class="menu-item" onclick="showSection('lugares')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>LUGARES PARA VISITAR</span>
+
+        <button class="menu-item" data-section="lugares" onclick="showSection('lugares')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="menu-label">PLACES TO VISIT</span>
         </button>
-        <button class="menu-item" onclick="showSection('passeios')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-          <span>PASSEIOS E EXPERIÊNCIAS</span>
+
+        <button class="menu-item" data-section="passeios" onclick="showSection('passeios')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <span class="menu-label">TOURS & EXPERIENCES</span>
         </button>
-        <button class="menu-item" onclick="showSection('transporte')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
-          <span>TRANSPORTE</span>
+
+        <button class="menu-item" data-section="transporte" onclick="showSection('transporte')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
+          <span class="menu-label">TRANSPORT</span>
         </button>
-        <button class="menu-item" onclick="showSection('avaliacao')">
-          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span>AVALIAÇÃO</span>
+
+        <button class="menu-item" data-section="avaliacao" onclick="showSection('avaliacao')">
+          <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="menu-label">REVIEWS</span>
         </button>
       </div>
 
       <button class="contact-btn" onclick="showSection('contato')">
-        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        CONTATO
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="contact-label">CONTACT</span>
       </button>
 
       <footer>
-        <p>Camboinhas Beach House © 2026</p>
+        <p id="footerText">Camboinhas Beach House © 2026</p>
       </footer>
     </div>
   </section>
-  
-<!-- BEM-VINDO -->
-<section id="bemvindo" class="section">
-  <h2 class="font-serif">Bem-vindo à Camboinhas Beach House!</h2>
 
-  <!-- Carrossel imagem única central -->
-  <div class="single-carousel">
-    <img id="carouselImage" src="https://i.imgur.com/tzixzxq.jpeg" alt="Camboinhas Beach House">
-  </div>
+  <!-- BEM-VINDO / WELCOME / BIENVENIDO -->
+  <section id="bemvindo" class="section" aria-labelledby="bemvindoTitle">
+    <h2 id="bemvindoTitle" class="font-serif">
+      <span class="lang lang-en">Welcome to Camboinhas Beach House!</span>
+      <span class="lang lang-pt">Bem-vindo à Camboinhas Beach House!</span>
+      <span class="lang lang-es">¡Bienvenido a Camboinhas Beach House!</span>
+    </h2>
 
-  <!-- Texto de boas-vindas -->
-  <p><strong>Seja muito bem-vindo(a) à Camboinhas Beach House! 🌴✨</strong></p>
+    <div class="single-carousel">
+      <img id="carouselImage" src="https://i.imgur.com/tzixzxq.jpeg" alt="" />
+    </div>
 
-  <p>
-    Desfrute de conforto e lazer nesta ampla casa linear em <strong>Camboinhas, Niterói (RJ)</strong>,
-    perfeita para famílias e grupos que querem aproveitar o melhor da região.
-    A casa acomoda até <strong>14 hóspedes</strong> com conforto e estilo,
-    contando com amplos espaços internos e externos.
-  </p>
+    <div class="lang lang-en">
+      <p><strong>Welcome to Camboinhas Beach House! 🌴✨</strong></p>
+      <p>
+        Enjoy comfort and leisure in this spacious single-level house in <strong>Camboinhas, Niterói (RJ)</strong>,
+        perfect for families and groups looking to make the most of the area.
+        The house comfortably accommodates up to <strong>14 guests</strong>,
+        featuring large indoor and outdoor living spaces.
+      </p>
 
-  <p><strong>🏡 O espaço</strong></p>
+      <p><strong>🏡 The space</strong></p>
+      <ul>
+        <li>Single-level house with <strong>5 bedrooms</strong> and <strong>6 bathrooms</strong></li>
+        <li>Private swimming pool</li>
+        <li>Fully equipped gourmet area with barbecue</li>
+        <li>Kids area</li>
+        <li>Garage for up to <strong>3 cars</strong></li>
+        <li>Approximately <strong>600 meters from Camboinhas beach</strong></li>
+        <li>Wi‑Fi and fully equipped rooms</li>
+      </ul>
 
-  <ul>
-    <li>Casa linear com <strong>5 quartos</strong> e <strong>6 banheiros</strong></li>
-    <li>Piscina privativa para momentos de lazer</li>
-    <li>Área gourmet completa com churrasqueira</li>
-    <li>Espaço kids para diversão das crianças</li>
-    <li>Garagem para até <strong>3 carros</strong></li>
-    <li>Aproximadamente <strong>600 metros da praia de Camboinhas</strong></li>
-    <li>Wi-Fi e ambientes totalmente equipados</li>
-  </ul>
+      <p><strong>📍 Location</strong></p>
+      <p>
+        Oceanic Region of Niterói – Camboinhas, Rio de Janeiro, Brazil.
+        Camboinhas beach is known for its light sand and calm waters,
+        perfect for swimming, outdoor sports and sunset walks.
+      </p>
+    </div>
 
-  <p class="mt-4">
-    A casa está localizada em um bairro tranquilo e seguro, próxima a mercados,
-    farmácias e restaurantes — ideal para quem busca praticidade,
-    descanso e momentos inesquecíveis com família ou amigos.
-  </p>
+    <div class="lang lang-pt">
+      <p><strong>Seja muito bem-vindo(a) à Camboinhas Beach House! 🌴✨</strong></p>
+      <p>
+        Desfrute de conforto e lazer nesta ampla casa linear em <strong>Camboinhas, Niterói (RJ)</strong>,
+        perfeita para famílias e grupos que querem aproveitar o melhor da região.
+        A casa acomoda até <strong>14 hóspedes</strong> com conforto e estilo,
+        contando com amplos espaços internos e externos.
+      </p>
 
-  <p><strong>📍 Localização</strong></p>
+      <p><strong>🏡 O espaço</strong></p>
+      <ul>
+        <li>Casa linear com <strong>5 quartos</strong> e <strong>6 banheiros</strong></li>
+        <li>Piscina privativa</li>
+        <li>Área gourmet completa com churrasqueira</li>
+        <li>Espaço kids</li>
+        <li>Garagem para até <strong>3 carros</strong></li>
+        <li>Aproximadamente <strong>600 metros da praia de Camboinhas</strong></li>
+        <li>Wi‑Fi e ambientes totalmente equipados</li>
+      </ul>
 
-  <p>
-    Região Oceânica de Niterói – Camboinhas, Rio de Janeiro, Brasil.
-    A praia de Camboinhas é conhecida por sua areia clara, mar calmo
-    e excelente infraestrutura, perfeita para banhos de mar,
-    esportes ao ar livre e caminhadas ao pôr do sol.
-  </p>
-</section>
+      <p><strong>📍 Localização</strong></p>
+      <p>
+        Região Oceânica de Niterói – Camboinhas, Rio de Janeiro, Brasil.
+        A praia de Camboinhas é conhecida por sua areia clara e mar calmo,
+        perfeita para banho, esportes ao ar livre e caminhadas ao pôr do sol.
+      </p>
+    </div>
 
-<!-- CSS do carrossel imagem única (FORMATO FIXO) -->
-<style>
-.single-carousel {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin: 25px 0;
-}
+    <div class="lang lang-es">
+      <p><strong>¡Bienvenido(a) a Camboinhas Beach House! 🌴✨</strong></p>
+      <p>
+        Disfrute de comodidad y ocio en esta amplia casa de una sola planta en <strong>Camboinhas, Niterói (RJ)</strong>,
+        perfecta para familias y grupos que desean aprovechar lo mejor de la zona.
+        La casa puede alojar hasta <strong>14 huéspedes</strong> con confort y estilo,
+        disponiendo de amplios espacios interiores y exteriores.
+      </p>
 
-.single-carousel img {
-  width: 90%;
-  max-width: 600px;
+      <p><strong>🏡 El espacio</strong></p>
+      <ul>
+        <li>Casa de una planta con <strong>5 dormitorios</strong> y <strong>6 baños</strong></li>
+        <li>Piscina privada</li>
+        <li>Área gourmet completa con barbacoa</li>
+        <li>Zona infantil</li>
+        <li>Garaje para hasta <strong>3 coches</strong></li>
+        <li>Aproximadamente <strong>600 metros de la playa de Camboinhas</strong></li>
+        <li>Wi‑Fi y espacios totalmente equipados</li>
+      </ul>
 
-  /* 🔒 ALTURA FIXA PARA NÃO ALTERAR O FORMATO */
-  height: 320px;
+      <p><strong>📍 Ubicación</strong></p>
+      <p>
+        Región Oceánica de Niterói – Camboinhas, Río de Janeiro, Brasil.
+        La playa de Camboinhas es conocida por su arena clara y aguas tranquilas,
+        ideal para bañarse, deportes al aire libre y paseos al atardecer.
+      </p>
+    </div>
+  </section>
 
-  /* 🔑 GARANTE ENQUADRAMENTO SEM DISTORCER */
-  object-fit: cover;
+  <!-- DIRECTIONS / INSTRUÇÕES / INDICACIONES -->
+  <section id="direcao" class="section" aria-labelledby="direcaoTitle">
+    <h2 id="direcaoTitle" class="font-serif">
+      <span class="lang lang-en">Directions</span>
+      <span class="lang lang-pt">Instruções de Direção</span>
+      <span class="lang lang-es">Indicaciones de Ruta</span>
+    </h2>
 
-  border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: opacity 0.6s ease-in-out;
-}
+    <div class="lang lang-en">
+      <p><strong>Address:</strong></p>
+      <p>Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ</p>
 
-/* Ajuste para telas maiores */
-@media (min-width: 768px) {
-  .single-carousel img {
-    height: 380px;
-  }
-}
-</style>
+      <p class="mt-6"><strong>✈️ From the house to the airport (GIG):</strong></p>
+      <ol>
+        <li>Exit Rua Dr. João Lopes Esteves towards Avenida Professor Florestan Fernandes.</li>
+        <li>Head toward downtown Niterói.</li>
+        <li>Take the Rio–Niterói Bridge.</li>
+        <li>After the bridge, follow signs to Linha Vermelha.</li>
+        <li>Continue on Linha Vermelha to Galeão Airport (GIG).</li>
+      </ol>
 
-<!-- Script do carrossel automático -->
-<script>
-const images = [
-  "https://i.imgur.com/tzixzxq.jpeg",
-  "https://i.imgur.com/7SZxwIY.jpeg",
-  "https://i.imgur.com/5SlIkFE.jpeg",
-  "https://i.imgur.com/uMlD9T5.jpeg",
-  "https://i.imgur.com/V3asbIX.jpeg",
-  "https://i.imgur.com/YWsqeE0.jpeg",
-  "https://i.imgur.com/7AGF0V8.jpeg",
-  "https://i.imgur.com/uxGvavK.jpeg",
-  "https://i.imgur.com/PU70VMh.jpeg",
-  "https://i.imgur.com/9ltmx3D.jpeg",
-  "https://i.imgur.com/0OFGKeu.jpeg",
-  "https://i.imgur.com/n2rU6eW.jpeg",
-  "https://i.imgur.com/jDPBIcl.jpeg",
-  "https://i.imgur.com/FLySskB.jpeg",
-  "https://i.imgur.com/qp2HX6D.jpeg",
-  "https://i.imgur.com/VvsHqlI.jpeg",
-  "https://i.imgur.com/RCSdmmA.jpeg",
-  "https://i.imgur.com/cbYfwdW.jpeg",
-  "https://i.imgur.com/4dLtbpN.jpeg",
-  "https://i.imgur.com/ctCCpSO.jpeg",
-  "https://i.imgur.com/vRvQShU.jpeg"
-];
+      <p class="mt-6"><strong>🏡 From the airport (GIG) to the house:</strong></p>
+      <ol>
+        <li>Follow signs to Linha Vermelha – Centro/Niterói.</li>
+        <li>Take Linha Vermelha toward Centro and the Rio–Niterói Bridge.</li>
+        <li>After crossing, head to the Oceanic Region / Camboinhas.</li>
+        <li>Access Avenida Professor Florestan Fernandes and enter Rua Dr. João Lopes Esteves.</li>
+        <li>Proceed to number 249.</li>
+      </ol>
 
-let current = 0;
-const img = document.getElementById("carouselImage");
+      <p class="mt-6"><strong>⏱️ Estimated time:</strong> Approximately 45 to 70 minutes, depending on traffic.</p>
 
-setInterval(() => {
-  img.style.opacity = 0;
-  setTimeout(() => {
-    current = (current + 1) % images.length;
-    img.src = images[current];
-    img.style.opacity = 1;
-  }, 400);
-}, 3500);
-</script>
-  
-<!-- DIREÇÃO -->
-<section id="direcao" class="section">
-  <h2 class="font-serif">Instruções de Direção</h2>
+      <p class="mt-6"><strong>💡 Tip:</strong> Use Google Maps or Waze for real-time navigation.</p>
 
-  <p><strong>Endereço:</strong></p>
-  <p>
-    Rua Dr. João Lopes Esteves, 249<br>
-    Camboinhas – Niterói / RJ
-  </p>
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Jo%C3%A3o+Lopes+Esteves+249+Camboinhas+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Open in Google Maps</a>
+    </div>
 
-  <p class="mt-6"><strong>✈️ Saindo da Casa para o Aeroporto (GIG):</strong></p>
-  <ol>
-    <li>Saia da Rua Dr. João Lopes Esteves em direção à Avenida Professor Florestan Fernandes.</li>
-    <li>Siga em direção ao Centro de Niterói.</li>
-    <li>Acesse a Ponte Rio–Niterói.</li>
-    <li>Após a ponte, siga as placas para a Linha Vermelha.</li>
-    <li>Continue pela Linha Vermelha até o Aeroporto Internacional do Galeão (GIG).</li>
-  </ol>
+    <div class="lang lang-pt">
+      <p><strong>Endereço:</strong></p>
+      <p>Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ</p>
 
-  <p class="mt-6"><strong>🏡 Saindo do Aeroporto (GIG) para a Casa:</strong></p>
-  <ol>
-    <li>Ao sair do Aeroporto Internacional do Galeão (GIG), siga as placas para a Linha Vermelha – Centro/Niterói.</li>
-    <li>Pegue a Linha Vermelha no sentido Centro.</li>
-    <li>Siga as indicações para a Ponte Rio–Niterói.</li>
-    <li>Após atravessar a ponte, siga em direção à Região Oceânica de Niterói / Camboinhas.</li>
-    <li>Acesse a Avenida Professor Florestan Fernandes.</li>
-    <li>Entre no bairro Camboinhas e siga até a Rua Dr. João Lopes Esteves.</li>
-    <li>Continue até o número 249.</li>
-  </ol>
+      <p class="mt-6"><strong>✈️ Saindo da Casa para o Aeroporto (GIG):</strong></p>
+      <ol>
+        <li>Saia da Rua Dr. João Lopes Esteves em direção à Avenida Professor Florestan Fernandes.</li>
+        <li>Siga em direção ao Centro de Niterói.</li>
+        <li>Acesse a Ponte Rio–Niterói.</li>
+        <li>Após a ponte, siga as placas para a Linha Vermelha.</li>
+        <li>Continue pela Linha Vermelha até o Aeroporto Internacional do Galeão (GIG).</li>
+      </ol>
 
-  <p class="mt-6"><strong>⏱️ Tempo estimado:</strong></p>
-  <p>
-    Aproximadamente 45 a 70 minutos, dependendo do trânsito e do horário.
-  </p>
+      <p class="mt-6"><strong>🏡 Saindo do Aeroporto (GIG) para a Casa:</strong></p>
+      <ol>
+        <li>Ao sair do aeroporto, siga as placas para a Linha Vermelha – Centro/Niterói.</li>
+        <li>Pegue a Linha Vermelha no sentido Centro e siga até a Ponte Rio–Niterói.</li>
+        <li>Após atravessar a ponte, siga em direção à Região Oceânica / Camboinhas.</li>
+        <li>Acesse a Avenida Professor Florestan Fernandes e entre na Rua Dr. João Lopes Esteves.</li>
+        <li>Continue até o número 249.</li>
+      </ol>
 
-  <p class="mt-6"><strong>💡 Dica:</strong></p>
-  <p>
-    Recomendamos o uso do Google Maps ou Waze para navegação em tempo real.
-    Clique abaixo para abrir o trajeto direto.
-  </p>
+      <p class="mt-6"><strong>⏱️ Tempo estimado:</strong> Aproximadamente 45 a 70 minutos, dependendo do trânsito.</p>
 
-  <a 
-    href="https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Jo%C3%A3o+Lopes+Esteves+249+Camboinhas+Niter%C3%B3i+RJ"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn-accent"
-  >
-    Abrir no Google Maps
-  </a>
-</section>
+      <p class="mt-6"><strong>💡 Dica:</strong> Recomendamos o uso do Google Maps ou Waze para navegação em tempo real.</p>
 
-  <!-- CHECK-IN / CHECK-OUT -->
-<section id="checkin" class="section">
-  <h2 class="font-serif">Regras da Casa</h2>
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Jo%C3%A3o+Lopes+Esteves+249+Camboinhas+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Abrir no Google Maps</a>
+    </div>
 
-  <p class="opacity-80 mb-6">
-    Lembre-se de que você estará na casa de alguém, por isso, trate o espaço com cuidado e respeito.
-  </p>
+    <div class="lang lang-es">
+      <p><strong>Dirección:</strong></p>
+      <p>Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ</p>
 
-  <div class="card card-lg">
-    <h3>📥 Check-in</h3>
-    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">
-      Após 15:00
-    </p>
-    <ul>
-      <li>Self check-in com teclado com senha</li>
-    </ul>
-  </div>
+      <p class="mt-6"><strong>✈️ Desde la casa al aeropuerto (GIG):</strong></p>
+      <ol>
+        <li>Saliendo de Rua Dr. João Lopes Esteves, diríjase a Avenida Professor Florestan Fernandes.</li>
+        <li>Continúe hacia el centro de Niterói.</li>
+        <li>Tome el Puente Rio–Niterói.</li>
+        <li>Tras el puente, siga las indicaciones hacia la Línea Vermelha.</li>
+        <li>Continúe por la Línea Vermelha hasta el Aeropuerto Internacional Galeão (GIG).</li>
+      </ol>
 
-  <div class="card card-lg">
-    <h3>📤 Check-out</h3>
-    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">
-      Antes das 11:00
-    </p>
-  </div>
+      <p class="mt-6"><strong>🏡 Desde el aeropuerto (GIG) hasta la casa:</strong></p>
+      <ol>
+        <li>Al salir del Aeropuerto Galeão, siga las señales hacia la Línea Vermelha – Centro/Niterói.</li>
+        <li>Tome la Línea Vermelha en dirección al Centro.</li>
+        <li>Siga las indicaciones hacia el Puente Rio–Niterói.</li>
+        <li>Tras cruzar el puente, diríjase a la Región Oceánica / Camboinhas.</li>
+        <li>Acceda a la Avenida Professor Florestan Fernandes y entre en Rua Dr. João Lopes Esteves.</li>
+        <li>Continúe hasta el número 249.</li>
+      </ol>
 
-  <div class="card card-lg">
-    <h3>🏡 Durante a estadia</h3>
-    <ul>
-      <li>👥 Máximo de <strong>14 hóspedes</strong></li>
-      <li>🐾 Animais de estimação são permitidos apenas mediante consulta prévia ao anfitrião.</li>
-      <li>🌙 Horário de silêncio: <strong>21:00 às 10:00</strong></li>
-      <li>🚫 Não são permitidas festas ou eventos</li>
-      <li>📸 Fotografia comercial permitida</li>
-      <li>🚬 É expressamente proibido fumar dentro da casa. Fume apenas na área externa.</li>
-    </ul>
-  </div>
-</section>
+      <p class="mt-6"><strong>⏱️ Tiempo estimado:</strong> Aproximadamente 45 a 70 minutos, dependiendo del tráfico.</p>
+
+      <p class="mt-6"><strong>💡 Consejo:</strong> Recomendamos usar Google Maps o Waze para navegación en tiempo real.</p>
+
+      <a href="https://www.google.com/maps/search/?api=1&query=Rua+Dr.+Jo%C3%A3o+Lopes+Esteves+249+Camboinhas+Niter%C3%B3i+RJ" target="_blank" rel="noopener noreferrer" class="btn-accent">Abrir en Google Maps</a>
+    </div>
+  </section>
+
+  <!-- CHECK-IN / CHECK-OUT / CHECK-IN -->
+  <section id="checkin" class="section" aria-labelledby="checkinTitle">
+    <h2 id="checkinTitle" class="font-serif">
+      <span class="lang lang-en">Check-in / Check-out</span>
+      <span class="lang lang-pt">Regras da Casa</span>
+      <span class="lang lang-es">Check-in / Check-out</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="opacity-80 mb-6">Please remember you are staying in someone's home — treat the property with care and respect.</p>
+
+      <div class="card card-lg">
+        <h3>📥 Check-in</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">After 3:00 PM</p>
+        <ul><li>Self check-in using the keypad (code provided by host)</li></ul>
+      </div>
+
+      <div class="card card-lg">
+        <h3>📤 Check-out</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Before 11:00 AM</p>
+      </div>
+
+      <div class="card card-lg">
+        <h3>🏡 During your stay</h3>
+        <ul>
+          <li>👥 Maximum of <strong>14 guests</strong></li>
+          <li>🐾 Pets allowed only upon prior agreement</li>
+          <li>🌙 Quiet hours: <strong>21:00 to 10:00</strong></li>
+          <li>🚫 No parties or events</li>
+          <li>📸 Commercial photography allowed</li>
+          <li>🚬 No smoking inside (outdoor smoking only)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="opacity-80 mb-6">Lembre-se de que você estará na casa de alguém, por isso, trate o espaço com cuidado e respeito.</p>
+
+      <div class="card card-lg">
+        <h3>📥 Check-in</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Após 15:00</p>
+        <ul><li>Self check-in com teclado com senha</li></ul>
+      </div>
+
+      <div class="card card-lg">
+        <h3>📤 Check-out</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Antes das 11:00</p>
+      </div>
+
+      <div class="card card-lg">
+        <h3>🏡 Durante a estadia</h3>
+        <ul>
+          <li>👥 Máximo de <strong>14 hóspedes</strong></li>
+          <li>🐾 Animais permitidos apenas mediante consulta prévia</li>
+          <li>🌙 Horário de silêncio: <strong>21:00 às 10:00</strong></li>
+          <li>🚫 Não são permitidas festas ou eventos</li>
+          <li>📸 Fotografia comercial permitida</li>
+          <li>🚬 É proibido fumar dentro da casa (somente áreas externas)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="opacity-80 mb-6">Por favor recuerde que se encuentra en la casa de otra persona; trate la propiedad con cuidado y respeto.</p>
+
+      <div class="card card-lg">
+        <h3>📥 Check-in</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Después de las 15:00</p>
+        <ul><li>Check-in automático con teclado (código proporcionado por el anfitrión)</li></ul>
+      </div>
+
+      <div class="card card-lg">
+        <h3>📤 Check-out</h3>
+        <p style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;">Antes de las 11:00</p>
+      </div>
+
+      <div class="card card-lg">
+        <h3>🏡 Durante su estancia</h3>
+        <ul>
+          <li>👥 Máximo de <strong>14 huéspedes</strong></li>
+          <li>🐾 Mascotas permitidas solo previa consulta con el anfitrión</li>
+          <li>🌙 Horario de silencio: <strong>21:00 a 10:00</strong></li>
+          <li>🚫 No se permiten fiestas ni eventos</li>
+          <li>📸 Fotografía comercial permitida</li>
+          <li>🚬 Prohibido fumar dentro de la casa (solo exterior)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <!-- WI-FI -->
-  <section id="wifi" class="section">
-    <h2 class="font-serif">Wi-Fi</h2>
+  <section id="wifi" class="section" aria-labelledby="wifiTitle">
+    <h2 id="wifiTitle" class="font-serif">
+      <span class="lang lang-en">Wi‑Fi</span>
+      <span class="lang lang-pt">Wi‑Fi</span>
+      <span class="lang lang-es">Wi‑Fi</span>
+    </h2>
 
     <div class="card card-lg wifi-box">
-      <svg class="icon icon-xl" style="margin: 0 auto 1rem;" viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
-      <p class="label">Nome da Rede</p>
+      <svg class="icon icon-xl" style="margin:0 auto 1rem;" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 13a10 10 0 0 1 14 0"/><path d="M8.5 16.5a5 5 0 0 1 7 0"/><path d="M2 8.82a15 15 0 0 1 20 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
+
+      <p class="label"><span class="lang lang-en">Network Name</span><span class="lang lang-pt">Nome da Rede</span><span class="lang lang-es">Nombre de la red</span></p>
       <p class="value">camboinhasbeachhouse</p>
-      <p class="label">Senha</p>
+
+      <p class="label"><span class="lang lang-en">Password</span><span class="lang lang-pt">Senha</span><span class="lang lang-es">Contraseña</span></p>
       <p class="value value-mono">Ferias2025</p>
     </div>
 
-    <p class="text-center opacity-80">Velocidade: 200 Mbps</p>
-    <p class="text-center opacity-80">Cobertura em toda a casa</p>
-
-    <p class="text-sm opacity-70 text-center mt-4">Em caso de problemas com a conexão, reinicie o roteador localizado na sala ou entre em contato conosco.</p>
+    <p class="text-center opacity-80"><span class="lang lang-en">Speed: 200 Mbps</span><span class="lang lang-pt">Velocidade: 200 Mbps</span><span class="lang lang-es">Velocidad: 200 Mbps</span></p>
+    <p class="text-center opacity-80"><span class="lang lang-en">Coverage throughout the house</span><span class="lang lang-pt">Cobertura em toda a casa</span><span class="lang lang-es">Cobertura en toda la casa</span></p>
+    <p class="text-sm opacity-70 text-center mt-4"><span class="lang lang-en">If you have connection issues, please restart the router located in the living room or contact us.</span><span class="lang lang-pt">Em caso de problemas com a conexão, reinicie o roteador localizado na sala ou entre em contato conosco.</span><span class="lang lang-es">En caso de problemas con la conexión, reinicie el router ubicado en la sala o contáctenos.</span></p>
   </section>
 
-<!-- FAQ -->
-<section id="faq" class="section">
-  <h2 class="font-serif">Perguntas Frequentes</h2>
+  <!-- FAQ -->
+  <section id="faq" class="section" aria-labelledby="faqTitle">
+    <h2 id="faqTitle" class="font-serif">
+      <span class="lang lang-en">Frequently Asked Questions</span>
+      <span class="lang lang-pt">Perguntas Frequentes</span>
+      <span class="lang lang-es">Preguntas Frecuentes</span>
+    </h2>
 
-  <div class="card">
-    <p class="title">📅 Qual o período mínimo de estadia?</p>
-    <p class="desc">
-      O período mínimo de estadia varia conforme a data e a disponibilidade.
-      As regras específicas são informadas no momento da reserva no site.
-    </p>
-  </div>
+    <div class="lang lang-en">
+      <div class="card">
+        <p class="title">📅 What is the minimum stay?</p>
+        <p class="desc">Minimum stay varies depending on date and availability. Rules provided at booking.</p>
+      </div>
 
-  <div class="card">
-    <p class="title">⏰ Quais são os horários de check-in e check-out?</p>
-    <p class="desc">
-      <strong>Check-in:</strong> após 15:00<br>
-      <strong>Check-out:</strong> antes das 11:00<br>
-      O acesso é feito por <strong>self check-in com teclado com senha</strong>.
-    </p>
-  </div>
+      <div class="card">
+        <p class="title">⏰ What are check-in/check-out times?</p>
+        <p class="desc"><strong>Check-in:</strong> after 3:00 PM<br/><strong>Check-out:</strong> before 11:00 AM</p>
+      </div>
 
-  <div class="card">
-    <p class="title">🐾 Aceitam animais de estimação?</p>
-    <p class="desc">
-      Animais de estimação são permitidos apenas mediante consulta prévia ao anfitrião.
-    </p>
-  </div>
+      <div class="card">
+        <p class="title">🐾 Are pets allowed?</p>
+        <p class="desc">Pets only upon prior agreement with the host.</p>
+      </div>
 
-  <div class="card">
-    <p class="title">👥 Quantas pessoas podem se hospedar?</p>
-    <p class="desc">
-      A casa acomoda no máximo <strong>14 hóspedes</strong>.
-    </p>
-  </div>
+      <div class="card">
+        <p class="title">👥 How many people can stay?</p>
+        <p class="desc">Up to <strong>14 guests</strong>.</p>
+      </div>
 
-  <div class="card">
-    <p class="title">🔇 Existe horário de silêncio?</p>
-    <p class="desc">
-      Sim. O horário de silêncio deve ser respeitado das <strong>21:00 às 10:00</strong>.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🎉 São permitidas festas ou eventos?</p>
-    <p class="desc">
-      Não. Festas ou eventos não são permitidos na propriedade.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">📸 Posso usar o espaço para fotos ou vídeos?</p>
-    <p class="desc">
-      Sim. A fotografia comercial é permitida no imóvel.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚬 É permitido fumar?</p>
-    <p class="desc">
-      É expressamente proibido fumar dentro da casa. Fume apenas na área externa.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">❓ Ficou com alguma dúvida?</p>
-    <p class="desc">
-      Caso precise de mais informações, entre em contato conosco.
-      Será um prazer ajudar a planejar sua estadia.
-    </p>
-  </div>
-</section>
-  
-<!-- REGRAS -->
-<section id="regras" class="section">
-  <h2 class="font-serif">Regras da Casa</h2>
-
-  <p class="mb-4">
-    Lembre-se de que você estará na casa de alguém, por isso, trate o espaço com cuidado e respeito.
-  </p>
-
-  <div class="card">
-    <p class="title">🕒 Check-in</p>
-    <p class="desc">
-      Check-in após <strong>15:00</strong><br>
-      Self check-in com teclado com senha
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🕚 Check-out</p>
-    <p class="desc">
-      Checkout antes das <strong>11:00</strong>
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">👥 Número máximo de hóspedes</p>
-    <p class="desc">
-      Máximo de <strong>14 hóspedes</strong> permitidos na propriedade.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🐾 Animais de estimação</p>
-    <p class="desc">
-      Animais de estimação são permitidos mediante consulta prévia ao anfitrião.<br>
-      As necessidades devem ser feitas fora da casa e recolhidas pelos responsáveis.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🌙 Horário de silêncio</p>
-    <p class="desc">
-      Das <strong>21:00 às 10:00</strong>.<br>
-      Não é permitido som após as <strong>22h</strong>, sob pena de multa.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚫 Festas e eventos</p>
-    <p class="desc">
-      Não são permitidas festas ou eventos na propriedade.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">📸 Fotografia comercial</p>
-    <p class="desc">
-      Fotografia comercial é permitida no imóvel.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚬 Fumar</p>
-    <p class="desc">
-      É expressamente proibido fumar dentro da casa.<br>
-      Permitido apenas nas áreas externas.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🧺 Toalhas</p>
-    <p class="desc">
-      Toalhas danificadas ou manchadas terão custo adicional de <strong>R$ 100,00 por peça</strong>.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🏊 Piscina e Instalações</p>
-    <p class="desc">
-      Não é permitido mexer na bomba da piscina ou no quadro de luz, sob pena de multa de <strong>R$ 500,00</strong>.<br>
-      Há um caseiro disponível para qualquer necessidade técnica.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🧪 Manutenção da Piscina</p>
-    <p class="desc">
-      Não utilizar nenhum produto na piscina. A manutenção é realizada exclusivamente por profissional autorizado.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🛋️ Móveis e Camas</p>
-    <p class="desc">
-      Não é permitido mover móveis ou camas de lugar.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">💡 Consumo de Energia</p>
-    <p class="desc">
-      Não deixar luzes ou aparelhos de ar-condicionado ligados quando não estiverem em uso.
-    </p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚗 Estacionamento</p>
-    <p class="desc">
-      A garagem comporta até <strong>3 carros</strong>.<br>
-      Veículos adicionais devem estacionar na rua.<br>
-      Não estacionar sobre a grama em nenhuma hipótese.
-    </p>
-  </div>
-
-</section>
-
-  <!-- SUPERMERCADOS -->
-<section id="supermercados" class="section">
-  <h2 class="font-serif">Supermercados e Lojas</h2>
-  <p class="mb-4">Principais estabelecimentos com fácil acesso da casa:</p>
-
-  <div class="card">
-    <div class="flex-between">
-      <p class="title">Camboinhas Mall</p>
-      <span class="badge">~500 m</span>
+      <div class="card">
+        <p class="title">🔇 Quiet hours?</p>
+        <p class="desc">Yes — from <strong>21:00 to 10:00</strong>.</p>
+      </div>
     </div>
-    <p class="desc">Centro comercial com lojas, padaria, cafés e serviços diversos.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Camboinhas+Mall+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
 
-  <div class="card">
-    <div class="flex-between">
-      <p class="title">Supermercado Pão de Açúcar – Itaipu</p>
-      <span class="badge">~10 min</span>
+    <div class="lang lang-pt">
+      <div class="card">
+        <p class="title">📅 Qual o período mínimo de estadia?</p>
+        <p class="desc">O período mínimo varia conforme data e disponibilidade. Regras informadas na reserva.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">⏰ Quais são os horários de check-in/check-out?</p>
+        <p class="desc"><strong>Check-in:</strong> após 15:00<br/><strong>Check-out:</strong> antes das 11:00</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🐾 Aceitam animais?</p>
+        <p class="desc">Animais permitidos mediante consulta prévia ao anfitrião.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">👥 Quantas pessoas podem se hospedar?</p>
+        <p class="desc">Acomoda até <strong>14 hóspedes</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🔇 Horário de silêncio?</p>
+        <p class="desc">Sim — das <strong>21:00 às 10:00</strong>.</p>
+      </div>
     </div>
-    <p class="desc">Rede de supermercado completa com açougue e padaria.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=P%C3%A3o+de+A%C3%A7%C3%BAcar+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
 
-  <div class="card">
-    <div class="flex-between">
-      <p class="title">Drogasmil – Itaipu</p>
-      <span class="badge">~10 min</span>
+    <div class="lang lang-es">
+      <div class="card">
+        <p class="title">📅 ¿Cuál es la estancia mínima?</p>
+        <p class="desc">La estancia mínima varía según la fecha y la disponibilidad. Condiciones informadas al reservar.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">⏰ ¿Cuáles son los horarios de check-in/check-out?</p>
+        <p class="desc"><strong>Check-in:</strong> después de las 15:00<br/><strong>Check-out:</strong> antes de las 11:00</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🐾 ¿Aceptan mascotas?</p>
+        <p class="desc">Las mascotas están permitidas solo previa consulta con el anfitrión.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">👥 ¿Cuántas personas pueden alojarse?</p>
+        <p class="desc">Admite hasta <strong>14 huéspedes</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🔇 ¿Horario de silencio?</p>
+        <p class="desc">Sí — de <strong>21:00 a 10:00</strong>.</p>
+      </div>
     </div>
-    <p class="desc">Farmácia completa com itens de higiene e medicamentos.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Drogasmil+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-</section>
-  
- <!-- RESTAURANTES -->
-<section id="restaurantes" class="section">
-  <h2 class="font-serif">Restaurantes e Quiosques</h2>
-  <p class="mb-4">Ótimas opções para refeições e bebidas à beira-mar e na região:</p>
+  </section>
 
-  <!-- DESTAQUES 5 ESTRELAS -->
-  <div id="destaques" class="destaque">
-    <h3 class="font-serif">⭐ Destaques 5 Estrelas</h3>
-    <p class="mb-4">Experiências gastronômicas imperdíveis na região:</p>
+  <!-- HOUSE RULES / REGRAS / NORMAS -->
+  <section id="regras" class="section" aria-labelledby="regrasTitle">
+    <h2 id="regrasTitle" class="font-serif">
+      <span class="lang lang-en">House Rules</span>
+      <span class="lang lang-pt">Regras da Casa</span>
+      <span class="lang lang-es">Normas de la Casa</span>
+    </h2>
 
-    <div class="card destaque-card">
-      <p class="title">Bemdito Gastrobar ⭐⭐⭐⭐⭐</p>
-      <p class="desc">
-        Gastrobar moderno com pratos autorais, drinks bem elaborados e ambiente sofisticado.
-      </p>
-      <a
-        href="https://www.google.com/maps/search/?api=1&query=Bemdito+Gastrobar+Niter%C3%B3i+RJ"
-        target="_blank"
-        class="btn-card"
-      >
-        Ver no Google Maps
+    <div class="lang lang-en">
+      <p class="mb-4">Please treat the property with care and respect.</p>
+
+      <div class="card">
+        <p class="title">🕒 Check-in</p>
+        <p class="desc">Check-in after <strong>3:00 PM</strong><br/>Self check-in using keypad</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🕚 Check-out</p>
+        <p class="desc">Check-out before <strong>11:00 AM</strong></p>
+      </div>
+
+      <div class="card">
+        <p class="title">👥 Maximum guests</p>
+        <p class="desc">Maximum of <strong>14 guests</strong> allowed.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🐾 Pets</p>
+        <p class="desc">Pets allowed only upon prior agreement. Clean up after pets.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🌙 Quiet hours</p>
+        <p class="desc">From <strong>21:00 to 10:00</strong>. No loud music after <strong>22:00</strong>. Fines may apply.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚫 Parties & events</p>
+        <p class="desc">Not permitted.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🧺 Towels</p>
+        <p class="desc">Damaged or stained towels: additional charge of <strong>R$ 100.00 per item</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🏊 Pool & equipment</p>
+        <p class="desc">Do not tamper with pool pump or electrical panel — fine of <strong>R$ 500.00</strong>. Caretaker available.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🛋️ Furniture</p>
+        <p class="desc">Do not move furniture or beds.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">💡 Energy use</p>
+        <p class="desc">Turn off lights and A/C when not in use.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚗 Parking</p>
+        <p class="desc">Garage fits up to <strong>3 cars</strong>. Do not park on the grass.</p>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">Lembre-se de que você estará na casa de alguém, por isso, trate o espaço com cuidado e respeito.</p>
+
+      <div class="card">
+        <p class="title">🕒 Check-in</p>
+        <p class="desc">Check-in após <strong>15:00</strong><br/>Self check-in com teclado</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🕚 Check-out</p>
+        <p class="desc">Checkout antes das <strong>11:00</strong></p>
+      </div>
+
+      <div class="card">
+        <p class="title">👥 Número máximo de hóspedes</p>
+        <p class="desc">Máximo de <strong>14 hóspedes</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🐾 Animais de estimação</p>
+        <p class="desc">Permitidos mediante consulta prévia. Recolher necessidades fora da casa.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🌙 Horário de silêncio</p>
+        <p class="desc">Das <strong>21:00 às 10:00</strong>. Não é permitido som após as <strong>22:00</strong>, sob pena de multa.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚫 Festas e eventos</p>
+        <p class="desc">Não são permitidas festas ou eventos na propriedade.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🧺 Toalhas</p>
+        <p class="desc">Toalhas danificadas terão custo adicional de <strong>R$ 100,00 por peça</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🏊 Piscina e Instalações</p>
+        <p class="desc">Não mexer na bomba da piscina ou quadro de luz — multa de <strong>R$ 500,00</strong>. Caseiro disponível.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🛋️ Móveis e Camas</p>
+        <p class="desc">Não é permitido mover móveis ou camas.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">💡 Consumo de Energia</p>
+        <p class="desc">Não deixar luzes ou ar-condicionado ligados quando não estiverem em uso.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚗 Estacionamento</p>
+        <p class="desc">Garagem para até <strong>3 carros</strong>. Não estacionar sobre a grama.</p>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">Recuerde que se encuentra en la casa de otra persona; trate el espacio con cuidado y respeto.</p>
+
+      <div class="card">
+        <p class="title">🕒 Check-in</p>
+        <p class="desc">Check-in después de <strong>15:00</strong><br/>Check-in automático con teclado</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🕚 Check-out</p>
+        <p class="desc">Check-out antes de las <strong>11:00</strong></p>
+      </div>
+
+      <div class="card">
+        <p class="title">👥 Número máximo de huéspedes</p>
+        <p class="desc">Máximo de <strong>14 huéspedes</strong> permitidos.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🐾 Mascotas</p>
+        <p class="desc">Las mascotas están permitidas previa consulta con el anfitrión. Recoger residuos fuera de la casa.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🌙 Horario de silencio</p>
+        <p class="desc">De <strong>21:00 a 10:00</strong>. No se permite música alta después de las <strong>22:00</strong>, bajo pena de multa.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">��� Fiestas y eventos</p>
+        <p class="desc">No se permiten fiestas ni eventos en la propiedad.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🧺 Toallas</p>
+        <p class="desc">Toallas dañadas o muy manchadas tendrán un coste adicional de <strong>R$ 100,00 por unidad</strong>.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🏊 Piscina e instalaciones</p>
+        <p class="desc">No manipular la bomba de la piscina ni el cuadro eléctrico — multa de <strong>R$ 500,00</strong>. Hay un cuidador disponible.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🛋️ Muebles y camas</p>
+        <p class="desc">No está permitido mover muebles o camas.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">💡 Consumo de energía</p>
+        <p class="desc">No dejar luces o aire acondicionado encendidos cuando no se usen.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚗 Estacionamiento</p>
+        <p class="desc">El garaje tiene capacidad para hasta <strong>3 coches</strong>. No estacionar sobre el césped.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPERMARKETS -->
+  <section id="supermercados" class="section" aria-labelledby="superTitle">
+    <h2 id="superTitle" class="font-serif">
+      <span class="lang lang-en">Supermarkets & Shops</span>
+      <span class="lang lang-pt">Supermercados e Lojas</span>
+      <span class="lang lang-es">Supermercados y Tiendas</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="mb-4">Main establishments within easy reach of the house:</p>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Camboinhas Mall</p><span class="badge">~500 m</span></div>
+        <p class="desc">Shopping center with stores, bakery, cafés and services.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Camboinhas+Mall+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Pão de Açúcar – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Full-service supermarket with butcher and bakery.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=P%C3%A3o+de+A%C3%A7%C3%BAcar+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Drogasmil – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Pharmacy with hygiene items and medications.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Drogasmil+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">Principais estabelecimentos com fácil acesso da casa:</p>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Camboinhas Mall</p><span class="badge">~500 m</span></div>
+        <p class="desc">Centro comercial com lojas, padaria, cafés e serviços.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Camboinhas+Mall+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Supermercado Pão de Açúcar – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Rede de supermercado completa com açougue e padaria.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=P%C3%A3o+de+A%C3%A7%C3%BAcar+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Drogasmil – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Farmácia com itens de higiene e medicamentos.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Drogasmil+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">Principales establecimientos con fácil acceso desde la casa:</p>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Camboinhas Mall</p><span class="badge">~500 m</span></div>
+        <p class="desc">Centro comercial con tiendas, panadería, cafeterías y servicios.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Camboinhas+Mall+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Supermercado Pão de Açúcar – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Cadena de supermercados con carnicería y panadería.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=P%C3%A3o+de+A%C3%A7%C3%BAcar+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <div class="flex-between"><p class="title">Drogasmil – Itaipu</p><span class="badge">~10 min</span></div>
+        <p class="desc">Farmacia con artículos de higiene y medicamentos.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Drogasmil+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESTAURANTS -->
+  <section id="restaurantes" class="section" aria-labelledby="restTitle">
+    <h2 id="restTitle" class="font-serif">
+      <span class="lang lang-en">Restaurants & Beach Stands</span>
+      <span class="lang lang-pt">Restaurantes e Quiosques</span>
+      <span class="lang lang-es">Restaurantes y Quioscos</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="mb-4">Great options for meals and drinks by the sea and nearby:</p>
+
+      <div class="card destaque-card">
+        <p class="title">Bemdito Gastrobar ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Modern gastrobar with signature dishes and crafted cocktails.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Bemdito+Gastrobar+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card destaque-card">
+        <p class="title">Elenita Bar y Cocina ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Contemporary Latin-influenced cuisine and a warm vibe.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Elenita+Bar+y+Cocina+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Quiosque Camboinhas</p>
+        <p class="desc">Traditional beach stand with snacks and drinks.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Torre di Pizza – Pizza & Snacks</p>
+        <p class="desc">Pizzeria near Camboinhas Mall.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Torre+di+Pizza+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">Ótimas opções para refeições e bebidas à beira-mar e na região:</p>
+
+      <div class="card destaque-card">
+        <p class="title">Bemdito Gastrobar ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Gastrobar moderno com pratos autorais e drinks.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Bemdito+Gastrobar+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card destaque-card">
+        <p class="title">Elenita Bar y Cocina ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Cozinha contemporânea com influência latina e ótima carta de drinks.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Elenita+Bar+y+Cocina+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Quiosque Camboinhas</p>
+        <p class="desc">Quiosque tradicional à beira-mar com petiscos e bebidas.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Torre di Pizza – Pizza & Lanches</p>
+        <p class="desc">Pizzaria perto do Camboinhas Mall.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Torre+di+Pizza+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">Excelentes opciones para comer y beber frente al mar y en la zona:</p>
+
+      <div class="card destaque-card">
+        <p class="title">Bemdito Gastrobar ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Gastrobar moderno con platos de autor y cócteles elaborados.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Bemdito+Gastrobar+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card destaque-card">
+        <p class="title">Elenita Bar y Cocina ⭐⭐⭐⭐⭐</p>
+        <p class="desc">Cocina contemporánea con influencia latina y ambiente acogedor.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Elenita+Bar+y+Cocina+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Quiosco Camboinhas</p>
+        <p class="desc">Quiosco tradicional frente al mar con aperitivos y bebidas.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Torre di Pizza – Pizza & Bocadillos</p>
+        <p class="desc">Pizzería cerca de Camboinhas Mall.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Torre+di+Pizza+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLACES TO VISIT / LUGARES / LUGARES -->
+  <section id="lugares" class="section" aria-labelledby="lugaresTitle">
+    <h2 id="lugaresTitle" class="font-serif">
+      <span class="lang lang-en">Places to Visit</span>
+      <span class="lang lang-pt">Lugares para Visitar</span>
+      <span class="lang lang-es">Lugares para Visitar</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="mb-4">Discover unmissable experiences in the region:</p>
+
+      <div class="card">
+        <p class="title">Camboinhas Beach</p>
+        <p class="desc">Wide beach with greenish waters, ideal for swimming and walks.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Piratininga Beach</p>
+        <p class="desc">Neighboring beach popular for surfing and outdoor activities.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Piratininga+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Itaipu Beach</p>
+        <p class="desc">Traditional beach with beach stands.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">Descubra experiências imperdíveis na região:</p>
+
+      <div class="card">
+        <p class="title">Praia de Camboinhas</p>
+        <p class="desc">Praia extensa com águas esverdeadas, ideal para banho e caminhadas.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Praia do Sossego</p>
+        <p class="desc">Praia tranquila, acessível por trilhas curtas.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Sossego+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Praia de Piratininga</p>
+        <p class="desc">Praia vizinha muito procurada para surf e atividades ao ar livre.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Piratininga+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">Descubra experiencias imperdibles en la región:</p>
+
+      <div class="card">
+        <p class="title">Playa de Camboinhas</p>
+        <p class="desc">Playa extensa con aguas verdosas, ideal para bañarse y caminar.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Playa do Sossego</p>
+        <p class="desc">Playa tranquila y con encanto, accesible por senderos cortos.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Sossego+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Playa de Piratininga</p>
+        <p class="desc">Playa vecina, muy popular para surf y actividades al aire libre.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Piratininga+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASSEIOS / TOURS -->
+  <section id="passeios" class="section" aria-labelledby="passeiosTitle">
+    <h2 id="passeiosTitle" class="font-serif">
+      <span class="lang lang-en">Tours & Experiences</span>
+      <span class="lang lang-pt">Passeios e Experiências</span>
+      <span class="lang lang-es">Paseos y Experiencias</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="mb-4">Suggested activities and places to explore:</p>
+
+      <div class="card">
+        <p class="title">Parque da Cidade</p>
+        <p class="desc">Park with panoramic viewpoints over the Oceanic Region of Niterói.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i+RJ" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Museum of Contemporary Art – MAC</p>
+        <p class="desc">Iconic work by Oscar Niemeyer with exhibitions and views of Guanabara Bay.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contempor%C3%A2nea+Niter%C3%B3i" target="_blank" class="btn-card">View on Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">Sugestões de atividades e lugares para conhecer:</p>
+
+      <div class="card">
+        <p class="title">Parque da Cidade de Niterói</p>
+        <p class="desc">Parque com mirantes panorâmicos sobre a Região Oceânica.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Museu de Arte Contemporânea – MAC</p>
+        <p class="desc">Obra de Oscar Niemeyer com exposições e vista da Baía de Guanabara.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contempor%C3%A2nea+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">Sugerencias de actividades y lugares para conocer:</p>
+
+      <div class="card">
+        <p class="title">Parque da Cidade</p>
+        <p class="desc">Parque con miradores panorámicos sobre la Región Oceánica de Niterói.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+
+      <div class="card">
+        <p class="title">Museo de Arte Contemporáneo – MAC</p>
+        <p class="desc">Obra icónica de Oscar Niemeyer con exposiciones y vistas de la Bahía de Guanabara.</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contempor%C3%A2nea+Niter%C3%B3i" target="_blank" class="btn-card">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSPORT -->
+  <section id="transporte" class="section" aria-labelledby="transporteTitle">
+    <h2 id="transporteTitle" class="font-serif">
+      <span class="lang lang-en">Transport</span>
+      <span class="lang lang-pt">Transporte</span>
+      <span class="lang lang-es">Transporte</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="mb-4">Mobility is primarily via ride-hailing apps, taxi, motorcycle taxi or nearby buses.</p>
+
+      <div class="card">
+        <p class="title">🚗 Ride-hailing apps</p>
+        <p class="desc">Services like <strong>Uber and 99</strong> operate across Niterói, including Camboinhas.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚕 Taxis</p>
+        <p class="desc">Conventional taxis available; practical for airport transfers with luggage.</p>
+        <p class="text-sm mt-2">Estimated fare Niterói ↔ Camboinhas: about R$30–R$50.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚌 Buses</p>
+        <p class="desc">No buses circulate directly inside Camboinhas; nearest stops are in Piratininga/Itaipu.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">📱 Practical tips</p>
+        <ul>
+          <li>Use Google Maps or local transit apps for schedules and routes.</li>
+          <li>Ride-hailing apps are usually fastest to airport or downtown.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <p class="mb-4">A mobilidade em Camboinhas é principalmente por aplicativos, táxi, moto-táxi ou ônibus próximo.</p>
+
+      <div class="card">
+        <p class="title">🚗 Aplicativos de Transporte</p>
+        <p class="desc">Serviços como <strong>Uber e 99</strong> funcionam em Niterói, incluindo Camboinhas.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚕 Táxi</p>
+        <p class="desc">Táxis convencionais disponíveis; práticos para transfer ao aeroporto.</p>
+        <p class="text-sm mt-2">Estimativa de custo Niterói ↔ Camboinhas: cerca de R$30–R$50.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚌 Ônibus</p>
+        <p class="desc">Camboinhas não possui linhas de ônibus internas; as paradas mais próximas estão em Piratininga/Itaipu.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">📱 Dicas Práticas</p>
+        <ul>
+          <li>Use Google Maps, Moovit ou apps locais para horários e rotas.</li>
+          <li>Apps de transporte tendem a ser a forma mais rápida para o aeroporto.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <p class="mb-4">La movilidad es principalmente por aplicaciones de transporte, taxi, moto-taxi o autobuses cercanos.</p>
+
+      <div class="card">
+        <p class="title">🚗 Aplicaciones de transporte</p>
+        <p class="desc">Servicios como <strong>Uber y 99</strong> operan en Niterói, incluyendo Camboinhas.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚕 Taxis</p>
+        <p class="desc">Taxis convencionales disponibles; prácticos para traslados al aeropuerto con equipaje.</p>
+        <p class="text-sm mt-2">Estimación Niterói ↔ Camboinhas: aprox. R$30–R$50.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">🚌 Autobuses</p>
+        <p class="desc">No hay líneas de autobús dentro de Camboinhas; las paradas más cercanas están en Piratininga/Itaipu.</p>
+      </div>
+
+      <div class="card">
+        <p class="title">📱 Consejos prácticos</p>
+        <ul>
+          <li>Use Google Maps, Moovit o apps locales para horarios y rutas.</li>
+          <li>Las apps de transporte suelen ser la forma más rápida al aeropuerto o centro.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS / AVALIAÇÃO / RESEÑAS -->
+  <section id="avaliacao" class="section" aria-labelledby="avaliacaoTitle">
+    <h2 id="avaliacaoTitle" class="font-serif">
+      <span class="lang lang-en">Reviews</span>
+      <span class="lang lang-pt">Avaliação</span>
+      <span class="lang lang-es">Reseñas</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <div class="text-center">
+        <p style="font-size:1.25rem;font-weight:600;margin-bottom:0.5rem;">Excellent stay in Camboinhas!</p>
+        <p class="opacity-80 mb-4">Camboinhas Beach House has an average rating of approximately <strong>4.78 / 5 stars</strong> on Airbnb.</p>
+        <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;margin-bottom:0.75rem;">View on Airbnb & Leave a Review</a>
+        <p class="text-sm opacity-70 mt-4">Your feedback is very important to us!</p>
+      </div>
+    </div>
+
+    <div class="lang lang-pt">
+      <div class="text-center">
+        <p style="font-size:1.25rem;font-weight:600;margin-bottom:0.5rem;">Excelente estadia em Camboinhas!</p>
+        <p class="opacity-80 mb-4">A Camboinhas Beach House foi avaliada com média de aproximadamente <strong>4.78 / 5 estrelas</strong> no Airbnb.</p>
+        <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;margin-bottom:0.75rem;">Ver no Airbnb & Avaliar</a>
+        <p class="text-sm opacity-70 mt-4">Sua opinião é muito importante para nós!</p>
+      </div>
+    </div>
+
+    <div class="lang lang-es">
+      <div class="text-center">
+        <p style="font-size:1.25rem;font-weight:600;margin-bottom:0.5rem;">¡Excelente estancia en Camboinhas!</p>
+        <p class="opacity-80 mb-4">Camboinhas Beach House tiene una valoración media aproximada de <strong>4.78 / 5 estrellas</strong> en Airbnb.</p>
+        <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="btn-accent" style="display:block;width:100%;margin-bottom:0.75rem;">Ver en Airbnb y valorar</a>
+        <p class="text-sm opacity-70 mt-4">¡Tu opinión es muy importante para nosotros!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / CONTATO / CONTACTO -->
+  <section id="contato" class="section" aria-labelledby="contatoTitle">
+    <h2 id="contatoTitle" class="font-serif">
+      <span class="lang lang-en">Contact</span>
+      <span class="lang lang-pt">Contato</span>
+      <span class="lang lang-es">Contacto</span>
+    </h2>
+
+    <div class="lang lang-en">
+      <p class="text-center opacity-90 mb-4">We are available to help before, during and after your stay.</p>
+
+      <a href="https://wa.me/5521986566909" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">📱</div>
+        <div><p class="title">WhatsApp</p><p class="desc">+55 21 98656-6909</p></div>
       </a>
-    </div>
 
-    <div class="card destaque-card">
-      <p class="title">Elenita Bar y Cocina ⭐⭐⭐⭐⭐</p>
-      <p class="desc">
-        Cozinha contemporânea com influência latina, excelente carta de drinks e clima acolhedor.
-      </p>
-      <a
-        href="https://www.google.com/maps/search/?api=1&query=Elenita+Bar+y+Cocina+Niter%C3%B3i+RJ"
-        target="_blank"
-        class="btn-card"
-      >
-        Ver no Google Maps
+      <a href="https://wa.me/5521965561989" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">🧑‍🌾</div>
+        <div><p class="title">Caretaker – Manoel</p><p class="desc">WhatsApp: +55 21 96556-1989</p></div>
       </a>
+
+      <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon airbnb">🏠</div>
+        <div><p class="title">Airbnb</p><p class="desc">View the listing</p></div>
+      </a>
+
+      <div class="text-center mt-6 pt-6 border-t">
+        <p class="title">Address</p>
+        <p class="text-sm opacity-80 mt-4">Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ<br/>Brazil</p>
+      </div>
     </div>
-  </div>
 
-  <!-- LISTA NORMAL -->
-  <div class="card">
-    <p class="title">Quiosque Camboinhas</p>
-    <p class="desc">Opção de quiosque tradicional à beira-mar com petiscos e bebidas.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
+    <div class="lang lang-pt">
+      <p class="text-center opacity-90 mb-4">Estamos à disposição para ajudar antes, durante e após a sua estadia.</p>
 
-  <div class="card">
-    <p class="title">Quiosque Tia Lúcia</p>
-    <p class="desc">Quiosque clássico na praia com atendimento típico carioca.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Tia+L%C3%BAcia+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
+      <a href="https://wa.me/5521986566909" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">📱</div>
+        <div><p class="title">WhatsApp</p><p class="desc">+55 21 98656-6909</p></div>
+      </a>
 
-  <div class="card">
-    <p class="title">Quiosque Harmonia</p>
-    <p class="desc">Ambiente descontraído com boa seleção de drinks e petiscos.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Harmonia+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
+      <a href="https://wa.me/5521965561989" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">🧑‍🌾</div>
+        <div><p class="title">Caseiro – Manoel</p><p class="desc">WhatsApp: +55 21 96556-1989</p></div>
+      </a>
 
-  <div class="card">
-    <p class="title">Quiosque Maza</p>
-    <p class="desc">Quiosque de frutos do mar, localizado diretamente na areia.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Quiosque+Maza+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
+      <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon airbnb">🏠</div>
+        <div><p class="title">Airbnb</p><p class="desc">Ver anúncio da Camboinhas Beach House</p></div>
+      </a>
 
-  <div class="card">
-    <p class="title">Macaw Beach Bar</p>
-    <p class="desc">Beach bar com culinária leve, drinks e ambiente na praia.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Macaw+Beach+Bar+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
-
-  <div class="card">
-    <p class="title">Torre di Pizza – Pizza & Lanches</p>
-    <p class="desc">Pizzaria e lanches perto do Camboinhas Mall.</p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Torre+di+Pizza+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">
-      Ver no Google Maps
-    </a>
-  </div>
-</section>
-
-  <!-- LUGARES PARA VISITAR -->
-<section id="lugares" class="section">
-  <h2 class="font-serif">Lugares para Visitar</h2>
-  <p class="mb-4">Descubra experiências imperdíveis na região:</p>
-
-  <div class="card">
-    <p class="title">Praia de Camboinhas</p>
-    <p class="desc">
-      Praia extensa com águas esverdeadas, ideal para banho, caminhada e esportes ao ar livre. 0
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-
-  <div class="card">
-    <p class="title">Praia do Sossego</p>
-    <p class="desc">
-      Praia tranquila e charmosa, acessível por trilhas curtas entre Camboinhas e Piratininga. 1
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Sossego+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-
-  <div class="card">
-    <p class="title">Praia de Piratininga</p>
-    <p class="desc">
-      Praia vizinha com boa infraestrutura, muito procurada para surf e atividades ao ar livre. 2
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Piratininga+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-
-  <div class="card">
-    <p class="title">Praia de Itaipu</p>
-    <p class="desc">
-      Praia tradicional com quiosques, ótimo para relaxar à beira-mar. 3
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Praia+de+Itaipu+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-</section>
-
-  <!-- PASSEIOS -->
-<section id="passeios" class="section">
-  <h2 class="font-serif">Passeios e Experiências</h2>
-  <p class="mb-4">Sugestões de atividades e lugares para conhecer:</p>
-
-  <div class="card">
-    <p class="title">Parque da Cidade de Niterói</p>
-    <p class="desc">
-      Parque com mirantes panorâmicos sobre toda a Região Oceânica de Niterói. 4
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Parque+da+Cidade+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-
-  <div class="card">
-    <p class="title">Orla de Camboinhas</p>
-    <p class="desc">
-      Caminhada relaxante à beira-mar, ótima para manhãs e finais de tarde. 5
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Orla+de+Camboinhas+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-
-  <div class="card">
-    <p class="title">Museu de Arte Contemporânea – MAC</p>
-    <p class="desc">
-      Obra icônica de Oscar Niemeyer com exposições e vista da Baía de Guanabara. 6
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Museu+de+Arte+Contempor%C3%A2nea+Niter%C3%B3i" target="_blank" class="btn-card">Ver no Google Maps</a>
-  </div>
-</section>
-
-  <!-- TRANSPORTE -->
-<section id="transporte" class="section">
-  <h2 class="font-serif">Transporte</h2>
-
-  <p class="mb-4">
-    A mobilidade em Camboinhas e na Região Oceânica de Niterói é feita principalmente por transporte por aplicativo, táxi, moto-táxi ou ônibus a partir de pontos próximos. Não há linhas de ônibus circulando diretamente dentro do bairro, e a maioria das opções de ônibus fica a uma curta caminhada ou traslado fora do perímetro imediato da casa. 0
-  </p>
-
-  <div class="card">
-    <p class="title">🚗 Aplicativos de Transporte</p>
-    <p class="desc">
-      Serviços como **Uber e 99** funcionam em toda a cidade de Niterói, incluindo Camboinhas. Você pode solicitar viagens diretamente pelo app para deslocar-se pelo bairro, para o centro da cidade ou para o Aeroporto Internacional do Galeão (GIG). 1
-    </p>
-    <p class="text-sm mt-2">💡 Dica: agendar a viagem com antecedência ajuda em horários de maior movimento.</p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚕 Táxi</p>
-    <p class="desc">
-      Táxis convencionais também estão disponíveis em Niterói e podem ser chamados por telefone, aplicativo de táxi ou solicitados em pontos movimentados. Para viagens do aeroporto ou do centro da cidade até Camboinhas, o táxi pode ser uma opção prática, especialmente com bagagem. 2
-    </p>
-    <p class="text-sm mt-2">💡 Estimativa de custo para trajeto Niterói ↔ Camboinhas: cerca de R$30–R$50 (pode variar conforme hora do dia e trânsito). 3</p>
-  </div>
-
-  <div class="card">
-    <p class="title">🛵 Moto-Táxi / Uber Moto</p>
-    <p class="desc">
-      Moto-táxis são uma alternativa rápida e econômica para trajetos mais curtos ou quando o trânsito está intenso. Apps como Uber oferecem a opção “Moto” em Niterói. 4
-    </p>
-    <p class="text-sm mt-2">💡 Ideal para deslocamentos ágeis dentro da região ou em horários de pico.</p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚌 Ônibus (transporte coletivo)</p>
-    <p class="desc">
-      Camboinhas **não possui linhas de ônibus circulando diretamente dentro do bairro**, e a parada de ônibus mais próxima fica em áreas vizinhas como Piratininga/Itaipu, de onde você pode pegar linhas que conectam ao centro e outras partes de Niterói. 5
-    </p>
-    <p class="text-sm mt-2">📍 Algumas linhas que param nas proximidades incluem: OC2, OC3A, 38A, 52 e 770D — com paradas que exigem caminhada (ex.: ~10–15 min até a Praia de Camboinhas). 6</p>
-  </div>
-
-  <div class="card">
-    <p class="title">🚍 Terminal Rodoviário de Niterói</p>
-    <p class="desc">
-      O **Terminal Rodoviário Governador Roberto Silveira** fica no Centro de Niterói e é o principal ponto de ônibus para viagens urbanas, intermunicipais e interestaduais. 7
-    </p>
-    <a href="https://www.google.com/maps/search/?api=1&query=Terminal+Rodovi%C3%A1rio+Governador+Roberto+Silveira+Niter%C3%B3i+RJ" target="_blank" class="btn-card">Ver no Google Maps</a>
-    <p class="text-sm mt-2">💡 A partir daqui você pode pegar ônibus até pontos próximos de Camboinhas (e depois completar o trajeto de táxi/app). 8</p>
-  </div>
-
-  <div class="card">
-    <p class="title">📱 Dicas Práticas</p>
-    <ul>
-      <li>Use **Google Maps, Moovit ou Citymapper** para horários, rotas e paradas em tempo real.</li>
-      <li>Apps de transporte (Uber/99) tendem a ser a forma mais rápida de chegar ao aeroporto ou ao centro.</li>
-      <li>Em dias de alta temporada ou eventos, programe sua saída com antecedência para evitar esperas longas.</li>
-    </ul>
-  </div>
-</section>
-
- <!-- AVALIAÇÃO -->
-<section id="avaliacao" class="section">
-  <h2 class="font-serif">Avaliação</h2>
-
-  <div class="text-center">
-    <svg class="icon icon-xl" style="margin: 0 auto 1rem; opacity: 0.8;" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-
-    <p style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">
-      Excelente estadia em Camboinhas!
-    </p>
-
-    <p class="opacity-80 mb-4">
-      A Camboinhas Beach House foi avaliada com uma média de aproximadamente
-      <strong>4.78 / 5 estrelas</strong> por hóspedes no Airbnb, com destaque para
-      <strong>check-in, comunicação e localização</strong>. 1
-    </p>
-
-    <a 
-      href="https://www.airbnb.com.br/rooms/22225001"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn-accent"
-      style="display: block; width: 100%; margin-bottom: 0.75rem;"
-    >
-      Ver no Airbnb & Avaliar
-    </a>
-
-    <p class="text-sm opacity-70 mt-4">
-      Sua opinião é muito importante para nós! ⭐  
-      Após sua estadia, ficaremos felizes se você deixar sua avaliação e experiência.
-    </p>
-  </div>
-</section>
-
- <!-- CONTATO -->
-<section id="contato" class="section">
-  <h2 class="font-serif">Contato</h2>
-
-  <p class="text-center opacity-90 mb-4">
-    Estamos à disposição para ajudar antes, durante e após a sua estadia.
-  </p>
-
-  <!-- WhatsApp -->
-  <a 
-    href="https://wa.me/5521986566909"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="contact-link"
-  >
-    <div class="contact-icon whatsapp">📱</div>
-    <div>
-      <p class="title">WhatsApp</p>
-      <p class="desc">+55 21 98656-6909</p>
+      <div class="text-center mt-6 pt-6 border-t">
+        <p class="title">Endereço</p>
+        <p class="text-sm opacity-80 mt-4">Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ<br/>Brasil</p>
+      </div>
     </div>
-  </a>
 
-  <!-- Caseiro Manoel -->
-  <a 
-    href="https://wa.me/5521965561989"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="contact-link"
-  >
-    <div class="contact-icon whatsapp">🧑‍🌾</div>
-    <div>
-      <p class="title">Caseiro – Manoel</p>
-      <p class="desc">WhatsApp: +55 21 96556-1989</p>
+    <div class="lang lang-es">
+      <p class="text-center opacity-90 mb-4">Estamos disponibles para ayudar antes, durante y después de su estancia.</p>
+
+      <a href="https://wa.me/5521986566909" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">📱</div>
+        <div><p class="title">WhatsApp</p><p class="desc">+55 21 98656-6909</p></div>
+      </a>
+
+      <a href="https://wa.me/5521965561989" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon whatsapp">🧑‍🌾</div>
+        <div><p class="title">Cuidador – Manoel</p><p class="desc">WhatsApp: +55 21 96556-1989</p></div>
+      </a>
+
+      <a href="https://www.airbnb.com.br/rooms/22225001" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon airbnb">🏠</div>
+        <div><p class="title">Airbnb</p><p class="desc">Ver el anuncio de Camboinhas Beach House</p></div>
+      </a>
+
+      <div class="text-center mt-6 pt-6 border-t">
+        <p class="title">Dirección</p>
+        <p class="text-sm opacity-80 mt-4">Rua Dr. João Lopes Esteves, 249<br/>Camboinhas – Niterói / RJ<br/>Brasil</p>
+      </div>
     </div>
-  </a>
+  </section>
 
-  <!-- Airbnb -->
-  <a 
-    href="https://www.airbnb.com.br/rooms/22225001"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="contact-link"
-  >
-    <div class="contact-icon airbnb">🏠</div>
-    <div>
-      <p class="title">Airbnb</p>
-      <p class="desc">Ver anúncio da Camboinhas Beach House</p>
-    </div>
-  </a>
+  <!-- Carousel CSS (kept from original) -->
+  <style>
+    .single-carousel { width: 100%; display:flex; justify-content:center; margin:25px 0; }
+    .single-carousel img { width: 90%; max-width:600px; height:320px; object-fit:cover; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.25); transition: opacity 0.6s ease-in-out; }
+    @media (min-width:768px) { .single-carousel img { height:380px; } }
+  </style>
 
-  <!-- Endereço -->
-  <div class="text-center mt-6 pt-6 border-t">
-    <p class="title">Endereço</p>
-    <p class="text-sm opacity-80 mt-4">
-      Rua Dr. João Lopes Esteves, 249<br>
-      Camboinhas – Niterói / RJ<br>
-      Brasil
-    </p>
-  </div>
-</section>
-
+  <!-- Scripts -->
   <script>
-    let menuOpen = false;
+    // Carousel
+    (function(){
+      const images = [
+        "https://i.imgur.com/tzixzxq.jpeg","https://i.imgur.com/7SZxwIY.jpeg","https://i.imgur.com/5SlIkFE.jpeg",
+        "https://i.imgur.com/uMlD9T5.jpeg","https://i.imgur.com/V3asbIX.jpeg","https://i.imgur.com/YWsqeE0.jpeg",
+        "https://i.imgur.com/7AGF0V8.jpeg","https://i.imgur.com/uxGvavK.jpeg","https://i.imgur.com/PU70VMh.jpeg",
+        "https://i.imgur.com/9ltmx3D.jpeg","https://i.imgur.com/0OFGKeu.jpeg","https://i.imgur.com/n2rU6eW.jpeg",
+        "https://i.imgur.com/jDPBIcl.jpeg","https://i.imgur.com/FLySskB.jpeg","https://i.imgur.com/qp2HX6D.jpeg",
+        "https://i.imgur.com/VvsHqlI.jpeg","https://i.imgur.com/RCSdmmA.jpeg","https://i.imgur.com/cbYfwdW.jpeg",
+        "https://i.imgur.com/4dLtbpN.jpeg","https://i.imgur.com/ctCCpSO.jpeg","https://i.imgur.com/vRvQShU.jpeg"
+      ];
+      let current = 0;
+      const img = document.getElementById("carouselImage");
+      if(!img) return;
+      setInterval(() => {
+        img.style.opacity = 0;
+        setTimeout(() => {
+          current = (current + 1) % images.length;
+          img.src = images[current];
+          img.style.opacity = 1;
+        }, 400);
+      }, 3500);
+    })();
 
+    // Menu open/close
+    let menuOpen = false;
     function toggleMenu() {
       menuOpen = !menuOpen;
-      document.getElementById('mobileMenu').classList.toggle('active', menuOpen);
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('active', menuOpen);
+      mobileMenu.setAttribute('aria-hidden', String(!menuOpen));
       const menuBtn = document.getElementById('menuBtn');
+      menuBtn.setAttribute('aria-expanded', String(menuOpen));
       if (menuOpen) {
-        menuBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
+        menuBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>';
       } else {
-        menuBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
+        menuBtn.innerHTML = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>';
       }
     }
 
+    // Show section
     function showSection(sectionId) {
-      document.querySelectorAll('.section, .home-section').forEach(section => {
-        section.classList.remove('active');
-      });
-
-      document.getElementById(sectionId).classList.add('active');
-
+      document.querySelectorAll('.section, .home-section').forEach(section => section.classList.remove('active'));
+      const el = document.getElementById(sectionId);
+      if (el) el.classList.add('active');
+      // close mobile menu
       document.getElementById('mobileMenu').classList.remove('active');
       menuOpen = false;
+      document.getElementById('menuBtn').setAttribute('aria-expanded', 'false');
       document.getElementById('menuBtn').innerHTML = sectionId === 'home'
-        ? '<svg class="icon" viewBox="0 0 24 24"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>'
-        : '<svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>';
-
+        ? '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>'
+        : '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>';
       if (sectionId !== 'home') {
         document.getElementById('menuBtn').onclick = () => showSection('home');
       } else {
         document.getElementById('menuBtn').onclick = toggleMenu;
       }
-
-      window.scrollTo(0, 0);
+      window.scrollTo(0,0);
     }
+
+    // Language switching logic
+    const LANG_KEY = 'camboinhas_lang';
+    const defaultLang = (navigator.language && navigator.language.startsWith('pt')) ? 'pt' : ((navigator.language && navigator.language.startsWith('es')) ? 'es' : 'en');
+
+    function setLang(lang) {
+      if (!lang) return;
+      try { localStorage.setItem(LANG_KEY, lang); } catch(e) {}
+      // Toggle language blocks
+      document.querySelectorAll('.lang').forEach(node => node.classList.remove('active'));
+      document.querySelectorAll('.lang-' + lang).forEach(node => node.classList.add('active'));
+      // Update simple labels (menu/button texts) using mapping
+      updateSimpleLabels(lang);
+      // Update header aria-pressed
+      document.getElementById('btnEN').setAttribute('aria-pressed', String(lang === 'en'));
+      document.getElementById('btnPT').setAttribute('aria-pressed', String(lang === 'pt'));
+      document.getElementById('btnES').setAttribute('aria-pressed', String(lang === 'es'));
+    }
+
+    // Map simple labels (menu labels and a few other UI labels)
+    const LABELS = {
+      en: {
+        headerTitle: 'Dear Guest',
+        menu: {
+          bemvindo: 'WELCOME',
+          direcao: 'DIRECTIONS',
+          checkin: 'CHECK-IN / CHECK-OUT',
+          wifi: 'WI-FI',
+          regras: 'HOUSE RULES',
+          faq: 'FAQ',
+          supermercados: 'SUPERMARKETS & SHOPS',
+          restaurantes: 'RESTAURANTS & CAFÉS',
+          lugares: 'PLACES TO VISIT',
+          passeios: 'TOURS & EXPERIENCES',
+          transporte: 'TRANSPORT',
+          avaliacao: 'REVIEWS',
+          contato: 'CONTACT'
+        },
+        contactBtn: 'CONTACT',
+        footer: 'Camboinhas Beach House © 2026',
+        mobileContact: 'CONTACT'
+      },
+      pt: {
+        headerTitle: 'Prezado Hóspede',
+        menu: {
+          bemvindo: 'BEM-VINDO',
+          direcao: 'INSTRUÇÕES DE DIREÇÃO',
+          checkin: 'CHECK-IN / CHECK-OUT',
+          wifi: 'WI-FI',
+          regras: 'REGRAS DA CASA',
+          faq: 'PERGUNTAS FREQUENTES',
+          supermercados: 'SUPERMERCADOS E LOJAS',
+          restaurantes: 'RESTAURANTES E CAFÉS',
+          lugares: 'LUGARES PARA VISITAR',
+          passeios: 'PASSEIOS E EXPERIÊNCIAS',
+          transporte: 'TRANSPORTE',
+          avaliacao: 'AVALIAÇÃO',
+          contato: 'CONTATO'
+        },
+        contactBtn: 'CONTATO',
+        footer: 'Camboinhas Beach House © 2026',
+        mobileContact: 'CONTATO'
+      },
+      es: {
+        headerTitle: 'Estimado Huésped',
+        menu: {
+          bemvindo: 'BIENVENIDO',
+          direcao: 'INDICACIONES',
+          checkin: 'CHECK-IN / CHECK-OUT',
+          wifi: 'WI-FI',
+          regras: 'NORMAS',
+          faq: 'PREGUNTAS',
+          supermercados: 'SUPERMERCADOS',
+          restaurantes: 'RESTAURANTES',
+          lugares: 'LUGARES',
+          passeios: 'PASEOS',
+          transporte: 'TRANSPORTE',
+          avaliacao: 'RESEÑAS',
+          contato: 'CONTACTO'
+        },
+        contactBtn: 'CONTACTO',
+        footer: 'Camboinhas Beach House © 2026',
+        mobileContact: 'CONTACTO'
+      }
+    };
+
+    function updateSimpleLabels(lang) {
+      const map = LABELS[lang] || LABELS.en;
+      // Header title
+      const headerTitle = document.getElementById('headerTitle');
+      if (headerTitle) headerTitle.textContent = map.headerTitle;
+      // Menu labels
+      document.querySelectorAll('.menu-label').forEach(node => {
+        const btn = node.closest('.menu-item');
+        if (!btn) return;
+        const section = btn.getAttribute('data-section');
+        if (section && map.menu[section]) node.textContent = map.menu[section];
+      });
+      // Mobile menu labels
+      document.querySelectorAll('.mobile-menu-item').forEach(btn => {
+        const section = btn.getAttribute('data-section');
+        const labelNode = btn.querySelector('.mobile-label');
+        if (labelNode && section && map.menu[section]) labelNode.textContent = map.menu[section];
+      });
+      // Contact button(s)
+      document.querySelectorAll('.contact-label').forEach(node => node.textContent = map.contactBtn || map.mobileContact);
+      document.querySelectorAll('.contact-btn').forEach(node => {
+        const span = node.querySelector('span');
+        if (span) span.textContent = map.contactBtn;
+      });
+      // Footer
+      const footer = document.getElementById('footerText');
+      if (footer) footer.textContent = map.footer;
+    }
+
+    // Initialization on load
+    (function init() {
+      const stored = (function(){ try { return localStorage.getItem(LANG_KEY); } catch(e){ return null; } })() || defaultLang;
+      // Ensure elements with class markers have classes 'lang-en', 'lang-pt', 'lang-es' (already in markup)
+      // Activate selected language
+      setLang(stored);
+
+      // Set initial menu button behavior
+      document.getElementById('menuBtn').onclick = toggleMenu;
+
+      // Ensure showSection default target is home
+      showSection('home');
+    })();
   </script>
 </body>
 </html>
